@@ -7,15 +7,15 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/action_messages" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_resources"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/action_resources" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_topic"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/action_topic" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_made"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/action_made" />
     </group>
@@ -23,11 +23,11 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_about"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/action_about" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_my"
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/action_my" />
         </menu>
