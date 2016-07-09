@@ -1,5 +1,6 @@
 package com.scu.charles.xiaoyu.app;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.scu.charles.xiaoyu.R;
+import com.scu.charles.xiaoyu.presenter.fragment.AboutFragment;
 import com.scu.charles.xiaoyu.presenter.fragment.SynthesisFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -25,9 +27,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        fm = getFragmentManager();
-
+        inits();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void inits() {
+        fm = getFragmentManager();
+        replaceFragment(SynthesisFragment.newInstance());
     }
 
     @Override
@@ -77,24 +82,27 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_message) {
-            fm.beginTransaction()
-                    .replace(R.id.main_content, SynthesisFragment.newInstance())
-                    .addToBackStack(SynthesisFragment.class.getName())
-                    .commit();
-        } else if (id == R.id.nav_gallery) {
+            replaceFragment(SynthesisFragment.newInstance());
+        } else if (id == R.id.nav_resources) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_topic) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_made) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_about) {
+            replaceFragment(AboutFragment.newInstance());
+        } else if (id == R.id.nav_my) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void replaceFragment(Fragment fragment){
+        fm.beginTransaction()
+                .replace(R.id.main_content, fragment)
+                .commit();
     }
 }
