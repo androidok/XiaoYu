@@ -5,8 +5,16 @@
     >
 
     <TextView
+        android:id="@+id/tv_hot_message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:text="这里是推荐热帖"/>
+
+    <Button
+        android:layout_below="@id/tv_hot_message"
+        android:id="@+id/bt_hot_send"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:text="sendMessage"/>
 
 </RelativeLayout>
