@@ -9,12 +9,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.scu.charles.xiaoyu.R;
 import com.scu.charles.xiaoyu.presenter.fragment.AboutFragment;
 import com.scu.charles.xiaoyu.presenter.fragment.SynthesisFragment;
+import com.scu.charles.xiaoyu.presenter.fragment.TopicFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_resources) {
 
         } else if (id == R.id.nav_topic) {
-
+            replaceFragment(TopicFragment.newInstance());
         } else if (id == R.id.nav_made) {
 
         } else if (id == R.id.nav_about) {
@@ -104,5 +107,24 @@ public class MainActivity extends AppCompatActivity
         fm.beginTransaction()
                 .replace(R.id.main_content, fragment)
                 .commit();
+    }
+
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK &&
+                event.getAction()==KeyEvent.ACTION_DOWN){
+            if((System.currentTimeMillis()-exitTime)>2000){
+                Toast.makeText(getApplicationContext(),"再按一次退出程序",
+                Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            }else{
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
