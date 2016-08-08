@@ -1,6 +1,7 @@
 package com.scu.charles.xiaoyu.presenter.fragment;
 
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -16,9 +17,10 @@ import java.util.List;
  *杂谈fragment，用于展示文字图片信息
  * create an instance of this fragment.
  */
-public class SynthesisFragment extends BasePresenterFragment<SynthesisVu>{
+public class SynthesisFragment extends BasePresenterFragment<SynthesisVu> implements SwipeRefreshLayout.OnRefreshListener{
     RecyclerView mListview;
     SynthesisAdapter mAdapter;
+    SwipeRefreshLayout mSwipeRefreshLayout;
     List<String> mData;
     @Override
     protected Class<SynthesisVu> getVuClass() {
@@ -45,5 +47,14 @@ public class SynthesisFragment extends BasePresenterFragment<SynthesisVu>{
         }
         mListview = vu.getmListview();
         mListview.setLayoutManager(linearLayoutManager);
+        mSwipeRefreshLayout = vu.getmSwipeRefreshLayout();
+        mSwipeRefreshLayout.setOnRefreshListener(SynthesisFragment.this);
+    }
+
+    @Override
+    public void onRefresh() {
+        mData.add("new 箫");
+        mSwipeRefreshLayout.setRefreshing(false);
+        mAdapter.notifyDataSetChanged();
     }
 }
